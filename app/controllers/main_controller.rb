@@ -4,10 +4,14 @@ class MainController < ApplicationController
   include Inplace::Upload
 
   def index
-    @uploaded_file = UploadedFile.find(:last)||UploadedFile.new
-    #@uploaded_file = UploadedFile.new
-    flash[:notice] ||= "Грузи картинку"
+    #@inplace_image = InplaceImage.new
+    ##@uploaded_file = UploadedFile.new
+    #flash[:notice] ||= "Грузи картинку"
   end
+
+  #def upload_complete
+  #  flash[:notice] ||= "Картинка загружена"
+  #end
 
   
 end

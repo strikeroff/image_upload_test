@@ -1,0 +1,22 @@
+<div style="padding-top:100px;padding-left:200px;">
+  <%= flash_messages %>
+  <div style="padding-top:100px;">
+    <% form_for @inplace_image, :url=> new_image_upload_url, :html=>{:multipart=>true} do |form| %>
+        <div>
+          <%= form.error_messages %>
+        </div>
+        <div>
+          Выберете картинку
+        </div>
+
+        <div>
+          <%= form.file_field :data %>
+        </div>
+        <div style="padding-top:20px;">
+          <%= submit_tag "Сохранить файл" %>
+        </div>
+    <% end %>
+
+  </div>
+
+</div>

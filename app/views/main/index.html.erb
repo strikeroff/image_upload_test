@@ -1,35 +1,5 @@
-<!--<style type="text/css">-->
-    <!--div.input-field {-->
-        <!--padding-top: 20px;-->
-    <!--}-->
-<!--</style>-->
-<div style="padding-top:100px;padding-left:200px;">
-    <!--<div style="padding-bottom:30px;width:800px;">-->
-    <!--<%#= flash_messages %>-->
-    <!--</div>-->
-    <!--<%# form_for @uploaded_file, :url=>upload_url, :html => { :multipart => true } do |f| %>-->
-    <!--<div class="input-field">-->
-    <!--<%#= f.error_messages %>-->
-    <!--</div>-->
-    <!--<div class="input-field">-->
-    <!--<%#= f.file_field :data %>-->
-    <!--</div>-->
-    <!--<div class="input-field">-->
-    <!--<%#= submit_tag 'Save' %>-->
-    <!--</div>-->
-    <%# end %>
-
-
-    <div style="padding-top:100px;">
-        <% url_to_file  = ((@uploaded_file.data.url.strip == "/datas/original/missing.png") ?  nil : @uploaded_file.data.url) %>
-        <%= inplace_imagefield("data", url_to_file||"",
-                upload_inplace_url,
-                :identifier     => 'data',
-                :size           => [{'name'=>'small', 'width'=>200, 'height'=>200}],
-                :view           => "small",
-#                 :default_image=> path_to_image("upload_image.jpg"),
-                :crop           => '',
-                :enable         => true) %>
-    </div>
-   
+<div style="margin-left:200px;margin-top:100px;">
+  <div>
+    <%= link_to "test image upload", image_upload_test_url %>
+  </div>
 </div>

@@ -3,5 +3,5 @@
 *.bat
 tmp
 .svn
-public/static
 .idea
+public/images/inplace_images
