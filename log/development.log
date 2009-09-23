@@ -16781,3 +16781,337 @@ Processing UploadImagesController#reupload_image (for 127.0.0.1 at 2009-09-23 18
   [4;36;1mSQL (16.0ms)[0m   [0;1mCOMMIT[0m
 [paperclip] saving E:/Work/Sevenstudio/tests/image_upload_test/public/images/inplace_images/datas/2/original/map.jpg
 Completed in 328ms (View: 0, DB: 31) | 200 OK [http://localhost/upload_images/2/reupload_image]
+
+
+Processing UploadImagesController#reupload_image (for 127.0.0.1 at 2009-09-23 18:22:34) [PUT]
+  Parameters: {"inplace_image"=>{"geometry_type"=>"mainpage", "data"=>#<File:C:/WINDOWS/Temp/CGI.4540.4>}, "commit"=>"Сохранить файл", "authenticity_token"=>"1c4e5014ad65444ab2a835a9f0bba9a8eebd81ab", "id"=>"2", "alias"=>"mainpage_show"}
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_encoding TO 'utf8'[0m
+  [4;35;1mInplaceImage Load (0.0ms)[0m   [0mSELECT * FROM "inplace_images" WHERE ("inplace_images"."id" = 2) [0m
+
+
+NoMethodError (undefined method `add_styles' for #<Paperclip::Attachment:0x493b044>):
+    /app/controllers/upload_images_controller.rb:36:in `reupload_image'
+    /app/controllers/upload_images_controller.rb:35:in `each'
+    /app/controllers/upload_images_controller.rb:35:in `reupload_image'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:1253:in `send'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:1253:in `perform_action_without_filters'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:617:in `call_filters'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    C:/Ruby/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/rescue.rb:136:in `perform_action_without_caching'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/query_cache.rb:8:in `cache'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:524:in `send'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:524:in `process_without_filters'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:606:in `process_without_session_management_support'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/session_management.rb:134:in `process'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:392:in `process'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:183:in `handle_request'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:110:in `dispatch_unlocked'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:123:in `dispatch'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:122:in `synchronize'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:122:in `dispatch'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:132:in `dispatch_cgi'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:39:in `dispatch'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/bin/../lib/mongrel/rails.rb:76:in `process'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/bin/../lib/mongrel/rails.rb:74:in `process'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:159:in `process_client'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:158:in `each'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:158:in `process_client'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:285:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:285:in `initialize'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:285:in `new'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:285:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:268:in `initialize'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:268:in `new'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:268:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel/configurator.rb:282:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel/configurator.rb:281:in `each'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel/configurator.rb:281:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/bin/mongrel_rails:128:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel/command.rb:212:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/bin/mongrel_rails:281
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:142:in `load_without_new_constant_marking'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:142:in `load'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:521:in `new_constants_in'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:142:in `load'
+    C:/Ruby/lib/ruby/gems/1.8/gems/rails-2.2.2/lib/commands/servers/mongrel.rb:64
+    C:/Ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    C:/Ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:153:in `require'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:521:in `new_constants_in'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:153:in `require'
+    C:/Ruby/lib/ruby/gems/1.8/gems/rails-2.2.2/lib/commands/server.rb:49
+    C:/Ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    C:/Ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendered C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/_trace (47.0ms)
+Rendered C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/_request_and_response (0.0ms)
+Rendering C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing UploadImagesController#reupload_image (for 127.0.0.1 at 2009-09-23 18:22:46) [PUT]
+  Parameters: {"inplace_image"=>{"geometry_type"=>"mainpage", "data"=>#<File:C:/WINDOWS/Temp/CGI.4540.9>}, "commit"=>"Сохранить файл", "authenticity_token"=>"1c4e5014ad65444ab2a835a9f0bba9a8eebd81ab", "id"=>"2", "alias"=>"mainpage_show"}
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_encoding TO 'utf8'[0m
+  [4;35;1mInplaceImage Load (15.0ms)[0m   [0mSELECT * FROM "inplace_images" WHERE ("inplace_images"."id" = 2) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mInplaceImage Update (0.0ms)[0m   [0mUPDATE "inplace_images" SET "data_updated_at" = '2009-09-23 13:22:46.328000', "upload_params" = NULL, "updated_at" = '2009-09-23 13:22:46.375000' WHERE "id" = 2[0m
+[paperclip] Saving attachments.
+[paperclip] deleting E:/Work/Sevenstudio/tests/image_upload_test/public/images/inplace_images/datas/2/original/map.jpg
+[paperclip] saving E:/Work/Sevenstudio/tests/image_upload_test/public/images/inplace_images/datas/2/original/map.jpg
+  [4;36;1mSQL (16.0ms)[0m   [0;1mCOMMIT[0m
+
+
+RuntimeError (Style default has no processors defined.):
+    C:/Ruby/lib/ruby/gems/1.8/gems/inplace_paperclip-2.3.0/lib/paperclip/attachment.rb:432:in `post_process_styles'
+    C:/Ruby/lib/ruby/gems/1.8/gems/inplace_paperclip-2.3.0/lib/paperclip/attachment.rb:430:in `each'
+    C:/Ruby/lib/ruby/gems/1.8/gems/inplace_paperclip-2.3.0/lib/paperclip/attachment.rb:430:in `post_process_styles'
+    C:/Ruby/lib/ruby/gems/1.8/gems/inplace_paperclip-2.3.0/lib/paperclip/attachment.rb:416:in `post_process'
+    C:/Ruby/lib/ruby/gems/1.8/gems/inplace_paperclip-2.3.0/lib/paperclip/attachment.rb:234:in `reprocess!'
+    /app/controllers/upload_images_controller.rb:43:in `reupload_image'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:1253:in `send'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:1253:in `perform_action_without_filters'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:617:in `call_filters'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    C:/Ruby/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/rescue.rb:136:in `perform_action_without_caching'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/query_cache.rb:8:in `cache'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:524:in `send'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:524:in `process_without_filters'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:606:in `process_without_session_management_support'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/session_management.rb:134:in `process'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:392:in `process'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:183:in `handle_request'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:110:in `dispatch_unlocked'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:123:in `dispatch'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:122:in `synchronize'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:122:in `dispatch'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:132:in `dispatch_cgi'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:39:in `dispatch'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/bin/../lib/mongrel/rails.rb:76:in `process'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/bin/../lib/mongrel/rails.rb:74:in `process'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:159:in `process_client'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:158:in `each'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:158:in `process_client'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:285:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:285:in `initialize'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:285:in `new'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:285:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:268:in `initialize'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:268:in `new'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:268:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel/configurator.rb:282:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel/configurator.rb:281:in `each'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel/configurator.rb:281:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/bin/mongrel_rails:128:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel/command.rb:212:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/bin/mongrel_rails:281
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:142:in `load_without_new_constant_marking'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:142:in `load'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:521:in `new_constants_in'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:142:in `load'
+    C:/Ruby/lib/ruby/gems/1.8/gems/rails-2.2.2/lib/commands/servers/mongrel.rb:64
+    C:/Ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    C:/Ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:153:in `require'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:521:in `new_constants_in'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:153:in `require'
+    C:/Ruby/lib/ruby/gems/1.8/gems/rails-2.2.2/lib/commands/server.rb:49
+    C:/Ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    C:/Ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendered C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/_trace (63.0ms)
+Rendered C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/_request_and_response (0.0ms)
+Rendering C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing UploadImagesController#reupload_image (for 127.0.0.1 at 2009-09-23 18:23:03) [PUT]
+  Parameters: {"inplace_image"=>{"geometry_type"=>"mainpage", "data"=>#<File:C:/WINDOWS/Temp/CGI.4540.5>}, "commit"=>"Сохранить файл", "authenticity_token"=>"1c4e5014ad65444ab2a835a9f0bba9a8eebd81ab", "id"=>"2", "alias"=>"mainpage_show"}
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_encoding TO 'utf8'[0m
+  [4;36;1mInplaceImage Load (0.0ms)[0m   [0;1mSELECT * FROM "inplace_images" WHERE ("inplace_images"."id" = 2) [0m
+  [4;35;1mSQL (15.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mInplaceImage Update (0.0ms)[0m   [0;1mUPDATE "inplace_images" SET "data_updated_at" = '2009-09-23 13:23:03.234000', "upload_params" = NULL, "updated_at" = '2009-09-23 13:23:03.515000' WHERE "id" = 2[0m
+[paperclip] Saving attachments.
+[paperclip] deleting E:/Work/Sevenstudio/tests/image_upload_test/public/images/inplace_images/datas/2/original/map.jpg
+  [4;35;1mSQL (0.0ms)[0m   [0mROLLBACK[0m
+
+
+Errno::EACCES (Permission denied - E:/Work/Sevenstudio/tests/image_upload_test/public/images/inplace_images/datas/2/original/map.jpg):
+    C:/Ruby/lib/ruby/1.8/fileutils.rb:1297:in `unlink'
+    C:/Ruby/lib/ruby/1.8/fileutils.rb:1297:in `remove_file'
+    C:/Ruby/lib/ruby/1.8/fileutils.rb:1305:in `platform_support'
+    C:/Ruby/lib/ruby/1.8/fileutils.rb:1296:in `remove_file'
+    C:/Ruby/lib/ruby/1.8/fileutils.rb:771:in `remove_file'
+    C:/Ruby/lib/ruby/1.8/fileutils.rb:549:in `rm'
+    C:/Ruby/lib/ruby/1.8/fileutils.rb:548:in `each'
+    C:/Ruby/lib/ruby/1.8/fileutils.rb:548:in `rm'
+    C:/Ruby/lib/ruby/gems/1.8/gems/inplace_paperclip-2.3.0/lib/paperclip/storage.rb:53:in `flush_deletes'
+    C:/Ruby/lib/ruby/gems/1.8/gems/inplace_paperclip-2.3.0/lib/paperclip/storage.rb:50:in `each'
+    C:/Ruby/lib/ruby/gems/1.8/gems/inplace_paperclip-2.3.0/lib/paperclip/storage.rb:50:in `flush_deletes'
+    C:/Ruby/lib/ruby/gems/1.8/gems/inplace_paperclip-2.3.0/lib/paperclip/attachment.rb:151:in `save'
+    C:/Ruby/lib/ruby/gems/1.8/gems/inplace_paperclip-2.3.0/lib/paperclip.rb:370:in `send'
+    C:/Ruby/lib/ruby/gems/1.8/gems/inplace_paperclip-2.3.0/lib/paperclip.rb:370:in `save_attached_files'
+    C:/Ruby/lib/ruby/gems/1.8/gems/inplace_paperclip-2.3.0/lib/paperclip.rb:363:in `each_attachment'
+    C:/Ruby/lib/ruby/gems/1.8/gems/inplace_paperclip-2.3.0/lib/paperclip.rb:362:in `each'
+    C:/Ruby/lib/ruby/gems/1.8/gems/inplace_paperclip-2.3.0/lib/paperclip.rb:362:in `each_attachment'
+    C:/Ruby/lib/ruby/gems/1.8/gems/inplace_paperclip-2.3.0/lib/paperclip.rb:369:in `save_attached_files'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/callbacks.rb:178:in `send'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/callbacks.rb:178:in `evaluate_method'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/callbacks.rb:166:in `call'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/callbacks.rb:93:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/callbacks.rb:92:in `each'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/callbacks.rb:92:in `send'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/callbacks.rb:92:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/callbacks.rb:277:in `run_callbacks'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/callbacks.rb:315:in `callback'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/callbacks.rb:223:in `create_or_update'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/base.rb:2383:in `save_without_validation'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/validations.rb:1009:in `save_without_dirty'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/dirty.rb:79:in `save_without_transactions'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/transactions.rb:179:in `send'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/transactions.rb:179:in `with_transaction_returning_status'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/postgresql_adapter.rb:550:in `transaction'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/transactions.rb:129:in `transaction'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/transactions.rb:138:in `transaction'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/transactions.rb:178:in `with_transaction_returning_status'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/transactions.rb:146:in `save'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/transactions.rb:158:in `rollback_active_record_state!'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/transactions.rb:146:in `save'
+    /app/controllers/upload_images_controller.rb:40:in `reupload_image'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:1253:in `send'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:1253:in `perform_action_without_filters'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:617:in `call_filters'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    C:/Ruby/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/rescue.rb:136:in `perform_action_without_caching'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/caching/sql_cache.rb:13:in `perform_action'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activerecord-2.2.2/lib/active_record/query_cache.rb:8:in `cache'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/caching/sql_cache.rb:12:in `perform_action'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:524:in `send'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:524:in `process_without_filters'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/filters.rb:606:in `process_without_session_management_support'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/session_management.rb:134:in `process'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:392:in `process'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:183:in `handle_request'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:110:in `dispatch_unlocked'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:123:in `dispatch'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:122:in `synchronize'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:122:in `dispatch'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:132:in `dispatch_cgi'
+    C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:39:in `dispatch'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/bin/../lib/mongrel/rails.rb:76:in `process'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/bin/../lib/mongrel/rails.rb:74:in `process'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:159:in `process_client'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:158:in `each'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:158:in `process_client'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:285:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:285:in `initialize'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:285:in `new'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:285:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:268:in `initialize'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:268:in `new'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel.rb:268:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel/configurator.rb:282:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel/configurator.rb:281:in `each'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel/configurator.rb:281:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/bin/mongrel_rails:128:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/lib/mongrel/command.rb:212:in `run'
+    C:/Ruby/lib/ruby/gems/1.8/gems/mongrel-1.1.5-x86-mswin32-60/bin/mongrel_rails:281
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:142:in `load_without_new_constant_marking'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:142:in `load'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:521:in `new_constants_in'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:142:in `load'
+    C:/Ruby/lib/ruby/gems/1.8/gems/rails-2.2.2/lib/commands/servers/mongrel.rb:64
+    C:/Ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    C:/Ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:153:in `require'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:521:in `new_constants_in'
+    C:/Ruby/lib/ruby/gems/1.8/gems/activesupport-2.2.2/lib/active_support/dependencies.rb:153:in `require'
+    C:/Ruby/lib/ruby/gems/1.8/gems/rails-2.2.2/lib/commands/server.rb:49
+    C:/Ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    C:/Ruby/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendered C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/_trace (188.0ms)
+Rendered C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/_request_and_response (0.0ms)
+Rendering C:/Ruby/lib/ruby/gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing UploadImagesController#reupload_image (for 127.0.0.1 at 2009-09-23 18:23:07) [PUT]
+  Parameters: {"inplace_image"=>{"geometry_type"=>"mainpage", "data"=>#<File:C:/WINDOWS/Temp/CGI.4540.4>}, "commit"=>"Сохранить файл", "authenticity_token"=>"1c4e5014ad65444ab2a835a9f0bba9a8eebd81ab", "id"=>"2", "alias"=>"mainpage_show"}
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_encoding TO 'utf8'[0m
+  [4;35;1mInplaceImage Load (15.0ms)[0m   [0mSELECT * FROM "inplace_images" WHERE ("inplace_images"."id" = 2) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mInplaceImage Update (0.0ms)[0m   [0mUPDATE "inplace_images" SET "data_updated_at" = '2009-09-23 13:23:08.031000', "upload_params" = NULL, "updated_at" = '2009-09-23 13:23:08.281000' WHERE "id" = 2[0m
+[paperclip] Saving attachments.
+[paperclip] deleting E:/Work/Sevenstudio/tests/image_upload_test/public/images/inplace_images/datas/2/original/map.jpg
+[paperclip] deleting E:/Work/Sevenstudio/tests/image_upload_test/public/images/inplace_images/datas/2/default/map.jpg
+[paperclip] saving E:/Work/Sevenstudio/tests/image_upload_test/public/images/inplace_images/datas/2/original/map.jpg
+[paperclip] saving E:/Work/Sevenstudio/tests/image_upload_test/public/images/inplace_images/datas/2/default/map.jpg
+  [4;36;1mSQL (15.0ms)[0m   [0;1mCOMMIT[0m
+Completed in 406ms (View: 0, DB: 30) | 200 OK [http://localhost/upload_images/2/reupload_image]
+
+
+Processing UploadImagesController#show (for 127.0.0.1 at 2009-09-23 18:23:28) [GET]
+  Parameters: {"id"=>"2"}
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_encoding TO 'utf8'[0m
+  [4;36;1mInplaceImage Load (0.0ms)[0m   [0;1mSELECT * FROM "inplace_images" WHERE ("inplace_images"."id" = 2) [0m
+Rendering template within layouts/application
+Rendering upload_images/show
+Completed in 47ms (View: 31, DB: 0) | 200 OK [http://localhost/upload_images/2]
+
+
+Processing UploadImagesController#reupload_image (for 127.0.0.1 at 2009-09-23 18:23:36) [PUT]
+  Parameters: {"inplace_image"=>{"geometry_type"=>"mainpage", "data"=>#<File:C:/WINDOWS/Temp/CGI.4540.11>}, "commit"=>"Сохранить файл", "authenticity_token"=>"1c4e5014ad65444ab2a835a9f0bba9a8eebd81ab", "id"=>"2", "alias"=>"mainpage_show"}
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'panic'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'notice'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_encoding TO 'utf8'[0m
+  [4;36;1mInplaceImage Load (0.0ms)[0m   [0;1mSELECT * FROM "inplace_images" WHERE ("inplace_images"."id" = 2) [0m
+  [4;35;1mSQL (16.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mInplaceImage Update (0.0ms)[0m   [0;1mUPDATE "inplace_images" SET "data_updated_at" = '2009-09-23 13:23:36.375000', "upload_params" = NULL, "data_file_size" = 30803, "data_file_name" = E'jackson.jpg', "updated_at" = '2009-09-23 13:23:36.625000' WHERE "id" = 2[0m
+[paperclip] Saving attachments.
+[paperclip] deleting E:/Work/Sevenstudio/tests/image_upload_test/public/images/inplace_images/datas/2/original/map.jpg
+[paperclip] deleting E:/Work/Sevenstudio/tests/image_upload_test/public/images/inplace_images/datas/2/default/map.jpg
+[paperclip] There was an unexpected error while deleting directories: Errno::EACCES
+[paperclip] saving E:/Work/Sevenstudio/tests/image_upload_test/public/images/inplace_images/datas/2/original/jackson.jpg
+[paperclip] saving E:/Work/Sevenstudio/tests/image_upload_test/public/images/inplace_images/datas/2/default/jackson.jpg
+  [4;35;1mSQL (16.0ms)[0m   [0mCOMMIT[0m
+Completed in 422ms (View: 0, DB: 32) | 200 OK [http://localhost/upload_images/2/reupload_image]
+
+
+Processing UploadImagesController#show (for 127.0.0.1 at 2009-09-23 18:26:08) [GET]
+  Parameters: {"id"=>"2"}
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_encoding TO 'utf8'[0m
+  [4;35;1mInplaceImage Load (0.0ms)[0m   [0mSELECT * FROM "inplace_images" WHERE ("inplace_images"."id" = 2) [0m
+Rendering template within layouts/application
+Rendering upload_images/show
+Completed in 31ms (View: 15, DB: 0) | 200 OK [http://localhost/upload_images/2]
