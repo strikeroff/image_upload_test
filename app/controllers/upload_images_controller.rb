@@ -32,6 +32,7 @@ class UploadImagesController < ApplicationController
     @inplace_image = InplaceImage.find(params["id"])
     @inplace_image.attributes.merge!(params["inplace_image"].merge({:alias=>params[:alias]}))
     @inplace_image.data = params["inplace_image"]['data']
+
     Configuration.image_types[params["inplace_image"]['geometry_type']].each do |style|
       @inplace_image.data.add_style({:"#{style["name"]}" => "#{style["width"]}x#{style['height']}"})
     end     
