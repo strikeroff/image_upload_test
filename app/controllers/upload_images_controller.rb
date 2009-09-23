@@ -34,13 +34,11 @@ class UploadImagesController < ApplicationController
     @inplace_image.data = params["inplace_image"]['data']
     Configuration.image_types[params["inplace_image"]['geometry_type']].each do |style|
       @inplace_image.data.add_style({:"#{style["name"]}" => "#{style["width"]}x#{style['height']}"})
-    end
-    #@inplace_image.data.styles = params["inplace_image"]['geometry_type']
+    end     
 
     unless  @inplace_image.save
       return render  :action=>"index"
-    else
-      #@inplace_image.data.reprocess!
+    else    
       return render :text=>{'inplace_image_id'=>@inplace_image.id, 'original_image_url'=>@inplace_image.data.url}.to_json
     end
   end
