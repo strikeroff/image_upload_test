@@ -6,9 +6,24 @@
           <%= form.error_messages %>
         </div>
         <div>
-          Выберете картинку
+          Укажите alias
+        </div>
+        <div>
+          
+          <input type="text" name="alias">
         </div>
 
+        <div>
+          Укажите тип геометрии(например mainpage)
+        </div>
+
+        <div>
+          <%= form.text_field :geometry_type %>
+        </div>
+
+        <div>
+          Выберете картинку
+        </div>
         <div>
           <%= form.file_field :data %>
         </div>

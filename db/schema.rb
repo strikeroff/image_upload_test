@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20090923075602) do
     t.integer  "data_file_size"
     t.datetime "data_updated_at"
     t.text     "upload_params"
+    t.string   "alias"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -27,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20090923075602) do
     t.integer  "data_file_size"
     t.datetime "data_updated_at"
     t.text     "upload_params"
+    t.string   "alias"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

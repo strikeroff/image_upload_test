@@ -5,12 +5,16 @@ class InplaceImage < ActiveRecord::Base
   validates_attachment_presence :data
   serialize :upload_params
 
+  attr_accessor :geometry_type, :crop_options
+
+
   def crop_str
-    unless self.upload_params.blank? || self.upload_params['crop'].blank?
-      x = self.upload_params['crop'][0]
-      y = self.upload_params['crop'][1]
-      width =  self.upload_params['crop'][2]
-      height = self.upload_params['crop'][3]
+    unless self.crop_geometry.blank?
+      crop_geometry =self.crop_options[:crop_geometry]
+      x = crop_geometry[0]
+      y = crop_geometry[1]
+      width =  crop_geometry[2]
+      height = crop_geometry[3]
       "-crop #{width}x#{height}+#{x}+#{y}"
     else
       ""
