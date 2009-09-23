@@ -20,7 +20,7 @@ ActionController::Routing::Routes.draw do |map|
                     :requirements=>{:id=>ID_SEPARATOR}
   ##################################
 
-  map.image_upload_test "upload_images/index", :controller=>"upload_images", :action=>"index"
+  map.image_upload_test "upload_images", :controller=>"upload_images", :action=>"index"
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end
