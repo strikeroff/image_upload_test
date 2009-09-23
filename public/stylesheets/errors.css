@@ -1,0 +1,92 @@
+.errorExplanation {
+    background-color: seashell;
+    border: 2px solid salmon;
+    font-size: 12px;
+    padding: 8px;
+    margin: 8px 13px 0px 13px;
+}
+
+.errorExplanation h2 {
+    background: salmon;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    margin: -8px;
+    padding: 5px;
+}
+
+.errorExplanation p {
+    padding-top: 15px;
+}
+
+.errorExplanation ul {
+    margin-left: 30px;
+}
+
+.errorExplanation ul li {
+    border: none;
+    font-size: 12px;
+    list-style-type: disc;
+    padding: 0px;
+}
+
+.fieldWithErrors {
+    border-bottom: 2px salmon solid;
+}
+
+p.flash_warning, p.flash_error {
+    background: lightpink;
+    color: maroon;
+    margin: 0px;
+    padding: 5px 0px 5px 16px;
+}
+
+p.flash_notice, p.flash_message {
+    background: #df9;
+    color: darkgreen;
+    margin: 0px;
+    padding: 5px 0px 5px 16px;
+}
+
+
+
+.info, .success, .warning, .error, .validation, .notice {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    border: 1px solid;
+    margin: 10px 10px 0px 10px;
+    padding: 15px 10px 15px 50px;
+    /*margin: 15px 50px 15px 50px;*/
+    background-repeat: no-repeat;
+    background-position: 10px center;    
+}
+
+.info {
+    color: #00529B;
+    background-color: #BDE5F8;
+    background-image: url('../images/errors/info.png');
+}
+
+.success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+    background-image: url('../images/errors/success.png');
+}
+
+.warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+    background-image: url('../images/errors/warning.png');
+}
+
+.error {
+    color: #D8000C;
+    background-color: #FFBABA;
+    background-image: url('../images/errors/error.png');
+}
+
+.notice {
+    color: #00529B;
+    background-color: #BDE5F8;
+    background-image: url('../images/errors/info.png');
+}

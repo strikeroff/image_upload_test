@@ -1,0 +1,7 @@
+*~
+*.swp
+*.bat
+tmp
+.svn
+public/static
+.idea

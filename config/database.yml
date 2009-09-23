@@ -1,0 +1,19 @@
+defaults: &defaults
+  adapter: postgresql
+  host: 127.0.0.1
+  username: root
+  password: root
+  pool: 6
+  encoding: utf8
+
+development:
+  database: upload_test
+  <<: *defaults
+
+test:
+  database: upload_test_test
+  <<: *defaults
+
+production:
+  database: upload_test
+  <<: *defaults
