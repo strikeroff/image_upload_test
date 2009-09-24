@@ -7,7 +7,11 @@ var $inplace = $inplace || {};
     },
 
     create: function(options) {
-      return new this.__template(options);
+      var instance = new this.__template(options);
+      if('function'==typeof(this.__constructor)) {
+        this.__constructor.apply(instance, options);
+      }
+      return instance;
     },
 
     clone: function() {
@@ -26,9 +30,14 @@ var $inplace = $inplace || {};
 
       return this;
     },
+
+    hasConstructor: function(constructor) {
+      this.__constructor = constructor;
+      return this;
+    },
     
     meta: function(obj) {
-      $.extend(this.prototype, obj);
+      $.extend(this, obj);
       return this;
     },
 
