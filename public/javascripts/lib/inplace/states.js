@@ -23,6 +23,14 @@
         return state;
       },
       
+      __makeHandlerMakers: function(handlers) {
+        var _this = this;
+        $.each(handlers, function(handler) {
+          _this.__makeHandlerMaker(handler);
+        });
+        return handlers || [];
+      },
+      
       _hasTransition: function(from, description) {
         this.__transitions = this.__transitions || {};
         var trans = this.__transitions[from];
@@ -30,7 +38,13 @@
           this.__transitions[from] = trans = {};
         }
         
-        // continue here
+        var direction = trans[description.event];
+        if(!direction) { // ?
+          trans[description.event] = direction = { target: description.target, handlers: this.__makeHandlerMakers(description.handlers)};
+        } else {
+          direction.target = description.target;
+          direction.handlers.join(this.__makeHandlerMakers(description.handlers));
+        }
       },
       
       hasTransition: function(transitionDescription) {
@@ -56,7 +70,7 @@
         return this;
       },
       
-      makeHandlerMaker: function(handlerName) {
+      __makeHandlerMaker: function(handlerName) {
         this.__handlers = this.__handlers || {};
         this[handlerName] = function(handler) {
           if(handler) {
