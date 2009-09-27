@@ -1,5 +1,3 @@
-var $inplace = $inplace || {};
-
 (function($) {
   $inplace.MessageTrapException = { type: 'message-trap' };
   
@@ -25,9 +23,14 @@ var $inplace = $inplace || {};
           
           .hasMethod('sendMessage')
           .hasMethod('sendParentMessage')
+          
+          .hasMethod('subscribe')
+          .hasMethod('subscribeUpstream')
 
           .hasConstructor(function(options) {
             this.__childs = [];
+            this.__downstreamHandlers = {};
+            this.__upstreamHandlers = {};
           })
 
           .appendChild(function(child) {
@@ -36,8 +39,23 @@ var $inplace = $inplace || {};
             return this;
           })
 
-          .messageHandler(function(msg){ })
-          .childMessageHandler(function(msg){ })
+          .messageHandler(function(msg){ 
+            var handlers = this.__downstreamHandlers[msg.topic];
+            if(handlers) {
+              $.each(handlers, function(handler) {
+                handler(msg);
+              });
+            }
+          })
+          
+          .childMessageHandler(function(msg){
+            var handlers = this.__upstreamHandlers[msg.topic];
+            if(handlers) {
+              $.each(handlers, function(handler) {
+                handler(msg);
+              });
+            }
+          })
 
           .sendMessage(function(msg) {
             this._processMessage(msg);
@@ -70,6 +88,14 @@ var $inplace = $inplace || {};
             } catch (exc) {
               console.log("Exception while processing broadcast message: "+exc.type);
             }
+          })
+          .subscribe(function(topic, handler) {
+            this.__downstreamHandlers[topic] = this.__downstreamHandlers[topic] || [];
+            this.__downstreamHandlers[topic].push(handler);
+          })
+          .subscribeUpstream(function(topic, handler) {
+            this.__upstreamHandlers[topic] = this.__upstreamHandlers[topic] || [];
+            this.__upstreamHandlers[topic].push(handler);
           });
     
   

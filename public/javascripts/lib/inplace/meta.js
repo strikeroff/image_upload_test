@@ -11,6 +11,7 @@ var $inplace = $inplace || {};
       if('function'==typeof(this.__constructor)) {
         this.__constructor.apply(instance, options);
       }
+      instance.meta = this;
       return instance;
     },
 
