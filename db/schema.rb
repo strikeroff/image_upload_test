@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090923075602) do
+ActiveRecord::Schema.define(:version => 20090928094528) do
 
   create_table "inplace_files", :force => true do |t|
     t.string   "data_file_name"
@@ -28,7 +28,16 @@ ActiveRecord::Schema.define(:version => 20090923075602) do
     t.integer  "data_file_size"
     t.datetime "data_updated_at"
     t.text     "upload_params"
+    t.string   "geometry_type"
     t.string   "alias"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "products", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "inplace_image_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

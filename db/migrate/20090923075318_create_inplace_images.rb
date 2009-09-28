@@ -6,6 +6,7 @@ class CreateInplaceImages < ActiveRecord::Migration
       t.integer :data_file_size
       t.datetime :data_updated_at
       t.text :upload_params
+      t.string :geometry_type
       t.string :alias
       t.timestamps
     end
