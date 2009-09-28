@@ -1,0 +1,29 @@
+<div style="padding-top:100px;padding-left:50px; padding-bottom:100px;">
+  <%= image_tag @inplace_image.data :original %>
+
+
+  <div style="padding-top:100px;">
+
+    <% form_for @inplace_image, :inplace_image, :url=> crop_image_url(:id=>@inplace_image.id) do |form| %>
+        <div>
+          <%= form.error_messages %>
+        </div>
+        <div>
+          ВВедите конфигурацию
+          <input type="text" name="inplace_image[crop_geometry]" value="[100,100,80,80]">
+        </div>
+
+        <div>
+          sub_type_name - (например default)
+          <input type="text" name="inplace_image[sub_type_name]" value="">
+        </div>
+
+
+        <div style="padding-top:20px;">
+          <%= submit_tag "Кропить" %>
+        </div>
+    <% end %>
+
+  </div>
+</div>
+
