@@ -5,7 +5,7 @@ class CreateInplaceFiles < ActiveRecord::Migration
       t.string :data_content_type
       t.integer :data_file_size
       t.datetime :data_updated_at
-      t.text :upload_params
+      
       t.string :alias
       t.timestamps
     end

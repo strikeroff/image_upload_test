@@ -24285,3 +24285,44 @@ Rendering products/show
   [4;36;1mInplaceImage Load (0.0ms)[0m   [0;1mSELECT * FROM "inplace_images" WHERE ("inplace_images"."id" = 5) [0m
   [4;35;1mInplaceImage Load (0.0ms)[0m   [0mSELECT * FROM "inplace_images" WHERE ("inplace_images"."id" = 6) [0m
 Completed in 47ms (View: 31, DB: 16) | 200 OK [http://localhost/products/15]
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_encoding TO 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateProducts (20090928094528)
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (109.0ms)[0m   [0;1mDROP TABLE "products"[0m
+  [4;35;1mSQL (16.0ms)[0m   [0mDELETE FROM schema_migrations WHERE version = '20090928094528'[0m
+  [4;36;1mSQL (31.0ms)[0m   [0;1mCOMMIT[0m
+Migrating to CreateInplaceFiles (20090923075602)
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mDROP TABLE "inplace_files"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mDELETE FROM schema_migrations WHERE version = '20090923075602'[0m
+  [4;36;1mSQL (16.0ms)[0m   [0;1mCOMMIT[0m
+Migrating to CreateInplaceImages (20090923075318)
+  [4;35;1mSQL (0.0ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mDROP TABLE "inplace_images"[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mDELETE FROM schema_migrations WHERE version = '20090923075318'[0m
+  [4;36;1mSQL (15.0ms)[0m   [0;1mCOMMIT[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_min_messages TO 'panic'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSET client_min_messages TO 'notice'[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSET client_encoding TO 'utf8'[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateInplaceImages (20090923075318)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (218.0ms)[0m   [0mCREATE TABLE "inplace_images" ("id" serial primary key, "data_file_name" character varying(255), "data_content_type" character varying(255), "data_file_size" integer, "data_updated_at" timestamp, "geometry_type" character varying(255), "alias" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090923075318')[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+Migrating to CreateInplaceFiles (20090923075602)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (141.0ms)[0m   [0mCREATE TABLE "inplace_files" ("id" serial primary key, "data_file_name" character varying(255), "data_content_type" character varying(255), "data_file_size" integer, "data_updated_at" timestamp, "alias" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090923075602')[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+Migrating to CreateProducts (20090928094528)
+  [4;36;1mSQL (0.0ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (125.0ms)[0m   [0mCREATE TABLE "products" ("id" serial primary key, "title" character varying(255), "description" text, "thumbnail_id" integer, "detail_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090928094528')[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mCOMMIT[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m

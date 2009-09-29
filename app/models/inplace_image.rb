@@ -5,7 +5,7 @@ class InplaceImage < ActiveRecord::Base
   validates_attachment_presence :data
   validates_presence_of :geometry_type
   #validates_length_of :geometry_type, :within => 3..20
-  serialize :upload_params
+  
 
   attr_accessor  :crop_options
 
