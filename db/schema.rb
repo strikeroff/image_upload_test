@@ -35,9 +35,10 @@ ActiveRecord::Schema.define(:version => 20090928094528) do
   end
 
   create_table "products", :force => true do |t|
-    t.string   "name"
+    t.string   "title"
     t.text     "description"
-    t.integer  "inplace_image_id"
+    t.integer  "thumbnail_id"
+    t.integer  "detail_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

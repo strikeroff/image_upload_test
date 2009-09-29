@@ -1,7 +1,7 @@
 <div style="padding-top:100px;padding-left:200px;">
   <%= flash_messages %>
   <div style="padding-top:100px;">
-    <% form_for @inplace_image, :url=> new_image_upload_url, :html=>{:multipart=>true} do |form| %>
+    <% form_for @inplace_image, :url=> new_image_upload_url, :html=>{:multipart=>true,:class => 'validate'} do |form| %>
         <div>
           <%= form.error_messages %>
         </div>

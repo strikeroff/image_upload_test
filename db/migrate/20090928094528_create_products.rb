@@ -1,9 +1,10 @@
 class CreateProducts < ActiveRecord::Migration
   def self.up
     create_table :products do |t|
-      t.string :name
+      t.string :title
       t.text :description
-      t.integer :inplace_image_id
+      t.integer :thumbnail_id
+      t.integer :detail_id
 
       t.timestamps
     end

@@ -1,5 +1,5 @@
 <div style="padding-top:100px;padding-left:100px;">
-  <%= image_tag @inplace_image.data :default %>
+  <%= image_tag(@inplace_image.data(:default) ) %>
 
   <div>
     <%= link_to "Кропать?", test_crop_image_url(@inplace_image) %>

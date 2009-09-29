@@ -14,6 +14,12 @@ ActionController::Routing::Routes.draw do |map|
   map.reupload_image "upload_images/:id/reupload_image", :controller=>"upload_images", :action=>"reupload_image",
                      :requirements=>{:id=>ID_SEPARATOR}
 
+  #####################Product urls##########################
+
+
+  map.resources :products
+  ###########################################################
+
   ###########################  Test url ###########################################
   map.test_crop_image "upload_images/:id/test_crop", :controller=>"upload_images", :action=>"test_crop",
                  :requirements=>{:id=>ID_SEPARATOR}

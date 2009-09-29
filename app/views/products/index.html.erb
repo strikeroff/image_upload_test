@@ -1,0 +1,8 @@
+<div style="padding-top:100px;padding-left:100px;">
+  <ul>
+    <% @products.each do |product| %>
+        <%= content_tag :li, link_to(product.title, product_url(product) ) %>
+    <% end unless @products.blank? %>
+  </ul>
+
+</div>
