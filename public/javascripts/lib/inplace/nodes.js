@@ -22,6 +22,30 @@
         return this;
       },
 
+      removeChild: function(child) {
+        if(child.parentNode != this) return;
+        child.parentNode = null;
+        this.__childs.without(child);
+        return this;
+      },
+
+      removeChilds: function() {
+        this.__childs.forEach(function(child) {
+          this.removeChild(child);
+        }, this);
+        
+        return this;
+      },
+
+      replaceChildsWith: function(newChilds) {
+        this.removeChilds();
+        $.makeArray(newChilds).forEach(function(child) {
+          this.appendChild(child);
+        }, this);
+        
+        return this;
+      },
+
       messageHandler: function(msg){ 
         var handlers = this.__downstreamHandlers[msg.topic];
         if(handlers) {
@@ -92,6 +116,14 @@
       subscribeUpstream: function(topic, handler) {
         this.__upstreamHandlers[topic] = this.__upstreamHandlers[topic] || [];
         this.__upstreamHandlers[topic].push(handler);
+        return this;
+      },
+
+      unsubscribeUpstream: function(topic, handler) {
+        var handlers = this.__upstreamHandlers[topic];
+        if(handlers) {
+          handlers = handlers.without(handler);
+        }
         return this;
       }
     });

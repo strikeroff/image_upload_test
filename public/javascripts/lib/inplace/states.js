@@ -17,7 +17,6 @@
         var state = this.__states[stateName];
         if(!state) { // ?
           state = behaviour.clone();
-          this.appendChild(state);
           this.__states[stateName] = state;
         }
         return state;
@@ -87,7 +86,8 @@
           });
           this.subscribe(event, this.__finishTransition);
         });
-        
+
+        this.replaceChildsWith(this.__states[stateName]);
       },
 
       __finishTransition: function(msg) {
