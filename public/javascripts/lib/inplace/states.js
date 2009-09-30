@@ -5,20 +5,20 @@
     this.target = target;
     this.handlers = handlers;
   };
+
+  $inplace.states.StateFinalizationException = { type: 'state-finalization-invalid' };
   
   $inplace.State = $inplace.Node.clone()
     .extend({
       hasState: function(stateName, behaviour) {
         var behaviour = behaviour || $inplace.State;
         this.__states = this.__states || {};
-        //this.__pstates = this.__pstates || {};
         
         var state = this.__states[stateName];
         if(!state) { // ?
           state = behaviour.clone();
           this.appendChild(state);
           this.__states[stateName] = state;
-          //this.__pstates[state] = stateName;
         }
         return state;
       },
@@ -43,7 +43,7 @@
           trans[description.event] = direction = { target: description.target, handlers: this.__makeHandlerMakers(description.handlers)};
         } else {
           direction.target = description.target;
-          direction.handlers.join(this.__makeHandlerMakers(description.handlers));
+          $.merge(direction.handlers, this.__makeHandlerMakers(description.handlers));
         }
       },
       
@@ -66,20 +66,62 @@
       },
       
       setDefaultState: function(stateName) {
-        this.defaultState = stateName;
+        this.__defaultState = stateName;
         return this;
+      },
+
+      reset: function() {
+        // Сбрасываем состояние в начальное
+
+        this.__resetHandlers();
+        this.__setupState(this.__defaultState);
+      },
+
+      __setupState: function(stateName) {
+        this._currentState = stateName;
+        if(!this.__transitions || !this.__transitions[this._currentState]) return;
+
+        $.each(this.__transitions[this._currentState], function(event, direction) {
+          $.each(direction.handlers, function(handler) {
+            this.subscribe(event, this[handler]);
+          });
+          this.subscribe(event, this.__finishTransition);
+        });
+        
+      },
+
+      __finishTransition: function(msg) {
+        var targetState = this.__transitions[this._currentState][msg.topic];
+        this.__resetHandlers();
+        this.__setupState(targetState);
+      },
+
+      __resetHandlers: function() {
+        // сносим хендлеры евентов
+        if(!this.__transitions
+              || !this._currentState
+              || !this.__transitions[this._currentState]) return;
+
+        $.each(this.__transitions[this._currentState], function(event, direction) {
+          $.each(direction.handlers, function(handler) {
+            this.unsubscribe(event, this[handler]);
+          });
+          this.unsubscribe(event, this.__finishTransition);
+        });
       },
       
       __makeHandlerMaker: function(handlerName) {
         this.__handlers = this.__handlers || {};
-        this[handlerName] = function(handler) {
-          if(handler) {
-            this.__handlers[handlerName] = handler;
+        
+        this[handlerName] = function(object) {
+          if('function' == typeof(object)) {
+            this.__handlers[handlerName] = object;
           } else {
-            this.__handlers[handlerName].apply(this);
+            this.__handlers[handlerName].apply(this, object);
           }
           return this;
         };
+        
         return this;
       }
     });

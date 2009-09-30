@@ -57,6 +57,7 @@
           this.parentNode._processChildMessage(msg);
         } catch (exc) {
           console.log('Exception while sending message to parent: '+exc.type);
+          if(exc.type != 'message-trap') throw exc;
         }
       },
       
@@ -70,17 +71,28 @@
           }
         } catch (exc) {
           console.log("Exception while processing broadcast message: "+exc.type);
+          if(exc.type != 'message-trap') throw exc;
         }
       },
       
       subscribe: function(topic, handler) {
         this.__downstreamHandlers[topic] = this.__downstreamHandlers[topic] || [];
         this.__downstreamHandlers[topic].push(handler);
+        return this;
+      },
+
+      unsubscribe: function(topic, handler) {
+        var handlers = this.__downstreamHandlers[topic];
+        if(handlers) {
+          handlers = handlers.without(handler);
+        }
+        return this;
       },
       
       subscribeUpstream: function(topic, handler) {
         this.__upstreamHandlers[topic] = this.__upstreamHandlers[topic] || [];
         this.__upstreamHandlers[topic].push(handler);
+        return this;
       }
     });
     

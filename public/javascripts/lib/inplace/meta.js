@@ -1,11 +1,3 @@
-Array.prototype.join = function(arr) {
-  for(i=0; i<arr.length; i++) {
-    this.push(arr[i]);
-  }
-  
-  return this;
-};
-
 var $inplace = $inplace || {};
 
 (function($) {
