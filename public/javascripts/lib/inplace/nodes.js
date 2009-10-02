@@ -47,8 +47,8 @@
         //console.log('enter to message handler');
         var handlers = this.__downstreamHandlers[msg.topic];
         if(handlers) {
-          $.each(handlers, function(handler) {
-            handler(msg);
+          $.each(handlers, function(index, handler) {
+            if('function' == typeof(handler)) handler(msg);
           });
         }
         //console.log('leave message handler');
@@ -57,8 +57,8 @@
       childMessageHandler: function(msg){
         var handlers = this.__upstreamHandlers[msg.topic];
         if(handlers) {
-          $.each(handlers, function(handler) {
-            handler(msg);
+          $.each(handlers, function(index, handler) {
+            if('function' == typeof(handler)) handler(msg);
           });
         }
       },

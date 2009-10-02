@@ -10,8 +10,9 @@
   
   $inplace.State = $inplace.Node.clone()
     .extend({
-      __transitions: {},
+      __transitions: new $inplace.utils.Hash(),
       _currentState: null,
+      __handlers: {},
       hasState: function(stateName, behaviour) {
         var behaviour = behaviour || $inplace.State;
         this.__states = this.__states || {};
@@ -60,14 +61,14 @@
         $.makeArray(handlers).forEach(function(handler) {
           this.__makeHandlerMaker(handler);
         }, this);
-        return handlers || [];
+        return $.makeArray(handlers) || [];
       },
       
       _hasTransition: function(from, description) {
-        this.__transitions = this.__transitions || {};
-        var trans = this.__transitions[from];
+        var trans = this.__transitions.get(from);
         if(!trans) { // ?
-          this.__transitions[from] = trans = {};
+          trans = {};
+          this.__transitions.set(from, trans);
         }
         
         var direction = trans[description.event];
@@ -81,42 +82,43 @@
 
       __setupState: function(stateName) {
         this._currentState = stateName;
-        if(!this.__transitions || !this.__transitions[this._currentState]) return;
+        if(!this.__transitions.has(this.__states[this._currentState])) return;
 
-        $.each(this.__transitions[this._currentState], function(event, direction) {
-          $.each(direction.handlers, function(handler) {
-            this.subscribe(event, this[handler]);
+        var _this = this;
+        
+        $.each(this.__transitions.get(this.__states[this._currentState]), function(event, direction) {
+          $.each(direction.handlers, function(index, handler) {
+            _this.subscribe(event, _this[handler]);
           });
-          this.subscribe(event, this.__finishTransition);
+          _this.subscribe(event, this.__finishTransition);
         });
 
         //this.replaceChildsWith(this.__states[stateName]);
       },
 
       __finishTransition: function(msg) {
-        var targetState = this.__transitions[this._currentState][msg.topic];
+        var targetState = this.__transitions.get(this.__states[this._currentState])[msg.topic];
         this.__resetHandlers();
         this.__setupState(targetState);
       },
 
       __resetHandlers: function() {
         // сносим хендлеры евентов
-        if(!this.__transitions
-              || !this._currentState
-              || !this.__transitions[this._currentState]) return;
+        if(!this._currentState || !this.__transitions.has(this.__states[this._currentState])) return;
 
-        $.each(this.__transitions[this._currentState], function(event, direction) {
-          $.each(direction.handlers, function(handler) {
-            this.unsubscribe(event, this[handler]);
+        var _this = this;
+        $.each(this.__transitions.get(this.__states[this._currentState]), function(event, direction) {
+          $.each(direction.handlers, function(index, handler) {
+            _this.unsubscribe(event, this[handler]);
           });
-          this.unsubscribe(event, this.__finishTransition);
+          _this.unsubscribe(event, this.__finishTransition);
         });
       },
       
       __makeHandlerMaker: function(handlerName) {
         console.log("handler name: ", handlerName);
         this.__handlers = this.__handlers || {};
-        
+
         this[handlerName] = function(object) {
           if('function' == typeof(object)) {
             this.__handlers[handlerName] = object;

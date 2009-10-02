@@ -1,24 +1,4 @@
-var $inplace = $inplace || {};
-$inplace.utils = {};
-
 (function($) {
-
-  $inplace.utils.CloneRegistry = function() {
-    this.__registry = [];
-    this.register = function(key, value) {
-      this.__registry.push({'key': key, 'value': value});
-    };
-    this.hasClone = function(key) {
-      return this.getClone(key) != null;
-    };
-    this.getClone = function(key) {
-      var result = null;
-      this.__registry.forEach(function(desc){
-        if(desc.key == key) result = desc.value;
-      });
-      return result;
-    };
-  };
 
   $inplace.utils.cloneFunction = function(translations) {
     var result = {};
