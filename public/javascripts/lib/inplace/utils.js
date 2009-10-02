@@ -66,4 +66,14 @@ $inplace.utils = {};
     };
   };
 
+
+  if (!Array.prototype.without) {
+    Array.prototype.without = function() {
+      var values = $.makeArray(arguments);
+      return this.removeIf(function(item){
+        return values.some(function(value) { return value == item; } );
+      }, this);
+    }
+  }
+
 })(jQuery);

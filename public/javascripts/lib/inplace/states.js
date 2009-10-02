@@ -90,14 +90,16 @@
           $.each(direction.handlers, function(index, handler) {
             _this.subscribe(event, _this[handler]);
           });
-          _this.subscribe(event, this.__finishTransition);
+          _this.subscribe(event, _this.__finishTransition);
         });
 
         //this.replaceChildsWith(this.__states[stateName]);
       },
 
       __finishTransition: function(msg) {
-        var targetState = this.__transitions.get(this.__states[this._currentState])[msg.topic];
+        // TODO: придумать как передать state через this. А то пездец.
+        var targetState = this.__transitions.get(this.__states[this._currentState])[msg.topic].target;
+
         this.__resetHandlers();
         this.__setupState(targetState);
       },
@@ -109,9 +111,9 @@
         var _this = this;
         $.each(this.__transitions.get(this.__states[this._currentState]), function(event, direction) {
           $.each(direction.handlers, function(index, handler) {
-            _this.unsubscribe(event, this[handler]);
+            _this.unsubscribe(event, _this[handler]);
           });
-          _this.unsubscribe(event, this.__finishTransition);
+          _this.unsubscribe(event, _this.__finishTransition);
         });
       },
       

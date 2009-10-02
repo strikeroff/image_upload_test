@@ -47,8 +47,9 @@
         //console.log('enter to message handler');
         var handlers = this.__downstreamHandlers[msg.topic];
         if(handlers) {
+          var _this = this;
           $.each(handlers, function(index, handler) {
-            if('function' == typeof(handler)) handler(msg);
+            if('function' == typeof(handler)) handler.apply(_this, [msg]);
           });
         }
         //console.log('leave message handler');
