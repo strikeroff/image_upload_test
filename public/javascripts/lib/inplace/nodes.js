@@ -3,18 +3,15 @@
   
   $inplace.Message = function(topic, sender, data) {
     this.topic  = topic;
-    this.sender = sender;
-    this.data   = data;
+    this.sender = sender || null;
+    this.data   = data || null;
   };
 
   $inplace.Node = $inplace.Meta.clone()
     .extend({
-
-      hasConstructor: function(options) {
-        this.__childs = [];
-        this.__downstreamHandlers = {};
-        this.__upstreamHandlers = {};
-      },
+      __childs: [],
+      __downstreamHandlers: [],
+      __upstreamHandlers: [],
 
       appendChild: function(child) {
         this.__childs.push(child);
@@ -46,13 +43,15 @@
         return this;
       },
 
-      messageHandler: function(msg){ 
+      messageHandler: function(msg){
+        //console.log('enter to message handler');
         var handlers = this.__downstreamHandlers[msg.topic];
         if(handlers) {
           $.each(handlers, function(handler) {
             handler(msg);
           });
         }
+        //console.log('leave message handler');
       },
       
       childMessageHandler: function(msg){
@@ -86,10 +85,11 @@
       },
       
       _processMessage: function(msg) {
+        //console.log('Enter to processMessage');
         try {
           this.messageHandler(msg);
           if(this.__childs) {
-            $.each(this.__childs, function(child) {
+            this.__childs.forEach(function(child) {
               child._processMessage(msg);
             });
           }
