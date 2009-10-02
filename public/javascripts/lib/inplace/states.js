@@ -117,15 +117,15 @@
       
       __makeHandlerMaker: function(handlerName) {
         console.log("handler name: ", handlerName);
-        this.__handlers = this.__handlers || {};
 
+        var _this = this;
         this[handlerName] = function(object) {
           if('function' == typeof(object)) {
-            this.__handlers[handlerName] = object;
+            _this.__handlers[handlerName] = object;
           } else {
-            this.__handlers[handlerName].apply(this, object);
+            _this.__handlers[handlerName].apply(_this, [object]);
           }
-          return this;
+          return _this;
         };
         
         return this;
