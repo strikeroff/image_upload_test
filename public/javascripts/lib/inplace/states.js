@@ -6,7 +6,17 @@
     this.handlers = handlers;
   };
 
+  $inplace.states.Behaviour = $inplace.State.clone();
+
   $inplace.states.StateFinalizationException = { type: 'state-finalization-invalid' };
+
+  $inplace.CompositeState = $inplace.Node.clone()
+    .extend({
+      addState: function(state) {
+        this.appendChild(state.clone());
+        return this;
+      }
+    });
   
   $inplace.State = $inplace.Node.clone()
     .extend({
@@ -125,7 +135,9 @@
           if('function' == typeof(object)) {
             _this.__handlers[handlerName] = object;
           } else {
-            _this.__handlers[handlerName].apply(_this, [object]);
+            if('function' == typeof(_this.handlers[handlerName])) {
+              _this.__handlers[handlerName].apply(_this, [object]);
+            }
           }
           return _this;
         };

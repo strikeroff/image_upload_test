@@ -64,13 +64,18 @@
         }
       },
 
-      sendMessage: function(msg) {
-        this._processMessage(msg);
+      sendMessage: function(topic, data, sender) {
+        var data = data || null;
+        var sender = sender || this;
+        this._processMessage(new $inplace.Message(topic, sender, data));
       },
 
-      sendParentMessage: function(msg){
+      sendParentMessage: function(topic, data, sender){
+        var data = data || null;
+        var sender = sender || this;
+        
         if(!this.parentNode) return this;
-        this.parentNode._processChildMessage(msg);
+        this.parentNode._processChildMessage(new $inplace.Message(topic, sender, data);
         return this;
       },
 
@@ -89,6 +94,7 @@
         //console.log('Enter to processMessage');
         try {
           this.messageHandler(msg);
+          
           if(this.__childs) {
             this.__childs.forEach(function(child) {
               child._processMessage(msg);
