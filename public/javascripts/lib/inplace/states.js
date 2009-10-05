@@ -8,18 +8,22 @@
 
   $inplace.states.StateFinalizationException = { type: 'state-finalization-invalid' };
 
-  $inplace.State = $inplace.Node.clone()
+  /**
+   * State - состояние. В UML данному объекту соответсвует определение вложенного состояния.
+   */
+  $inplace.State = $inplace.Node.clone("State")
     .extend({
-      __transitions: new $inplace.utils.Hash(),
+      __transitions: $inplace.utils.clonableObject(new $inplace.utils.Hash()),
       _currentState: null,
       __handlers: {},
-      hasState: function(stateName, behaviour) {
+      __states: $inplace.utils.clonableObject(),
+    
+      hasState: function(stateName, behaviour, hint) {
         var behaviour = behaviour || $inplace.State;
-        this.__states = this.__states || {};
 
         var state = this.__states[stateName];
-        if(!state) { // ?
-          state = behaviour.clone();
+        if(!state) {
+          state = behaviour.clone(hint);
           this.appendChild(state);
           this.__states[stateName] = state;
         }
@@ -57,6 +61,11 @@
         return this;
       },
 
+      hasHandler: function(hanlerName) {
+        this.__makeHandlerMaker(hanlerName);
+        return this;
+      },
+
       __makeHandlerMakers: function(handlers) {
         $.makeArray(handlers).forEach(function(handler) {
           this.__makeHandlerMaker(handler);
@@ -84,6 +93,8 @@
         this._currentState = stateName;
         if(!this.__transitions.has(this.__states[this._currentState])) return;
 
+        //console.log("Setup state ", stateName, " for ", this.__hint);
+
         var _this = this;
 
         $.each(this.__transitions.get(this.__states[this._currentState]), function(event, direction) {
@@ -93,20 +104,17 @@
           _this.subscribe(event, _this.__finishTransition);
         });
 
+        this.disableChilds();
+        this.__states[this._currentState].enable();
+
         //this.replaceChildsWith(this.__states[stateName]);
-      },
-
-      __finishTransition: function(msg) {
-        // TODO: придумать как передать state через this. А то пездец.
-        var targetState = this.__transitions.get(this.__states[this._currentState])[msg.topic].target;
-
-        this.__resetHandlers();
-        this.__setupState(targetState);
       },
 
       __resetHandlers: function() {
         // сносим хендлеры евентов
         if(!this._currentState || !this.__transitions.has(this.__states[this._currentState])) return;
+
+        //console.log("Reset handlers for: ", this.__hint);
 
         var _this = this;
         $.each(this.__transitions.get(this.__states[this._currentState]), function(event, direction) {
@@ -117,15 +125,22 @@
         });
       },
 
-      __makeHandlerMaker: function(handlerName) {
-        console.log("handler name: ", handlerName);
+      __finishTransition: function(msg) {
+        var targetState = this.__transitions.get(this.__states[this._currentState])[msg.topic].target;
 
+        this.__resetHandlers();
+        this.__setupState(targetState);
+      },
+
+      __makeHandlerMaker: function(handlerName) {
+        
+        this.__handlers[handlerName] = null;
         var _this = this;
         this[handlerName] = function(object) {
           if('function' == typeof(object)) {
             _this.__handlers[handlerName] = object;
           } else {
-            if('function' == typeof(_this.handlers[handlerName])) {
+            if('function' == typeof(_this.__handlers[handlerName])) {
               _this.__handlers[handlerName].apply(_this, [object]);
             }
           }
@@ -136,33 +151,59 @@
       }
     });
 
-  $inplace.CompositeState = $inplace.State.clone()
+  /**
+   * Behaviour (поведение) - это состояние, которое может делегировать обработку своих событий
+   * другому состоянию.
+   * В UML определения нет.
+   */
+  $inplace.states.Behaviour = $inplace.State.clone("Behaviour")
     .extend({
-      hasState: function(behaviour) {
+      _delegateHandlersInto: function(target) {
+        var source = this;
+        $.each(this.__handlers, function(handlerName, handler){
+          //if(!handler) return;
+
+          target.__makeHandlerMaker(handlerName);
+          if('function' == typeof(handler)) {
+            target[handlerName](handler);
+          }
+
+          console.debug("delegating handler: ", handlerName);
+          source[handlerName] = function(object) {
+            console.debug('delegate handler call for ', handlerName);
+            target[handlerName](object);
+          };
+        });
+      }
+    });
+
+  /**
+   * CompositeState - составное состояние, которое представляет из себя множество параллельно
+   * функционирующих состояний. Стандартные методы, характерные для простого State'а перекрыты,
+   * т.к. составное состояние не может описывать свои внутренние переходы. Эту задачу должны
+   * выполнять регистрируемые в нем параллельные состояния.
+   * В UML такой объект является обычным состоянием имеющим несколько параллельных вложенных состояний. 
+   */
+  $inplace.CompositeState = $inplace.states.Behaviour.clone("CompositeState")
+    .extend({
+      hasState: function(behaviour, hint) {
         if(!behaviour._delegateHandlersInto) return this;
         
-        var instance = behaviour.clone();
+        var instance = behaviour.clone(hint);
         this.appendChild(instance);
         instance._delegateHandlersInto(this);
         return this;
       },
-      parentState: null, hasTransition: null, hasTransitions: null, setDefaultState: null, reset: null
+      reset: function() {
+        this.__childs.forEach(function(child){
+          if(!child.reset) return;
+          child.reset();
+        });
+        return this;
+      },
+      parentState: null, hasTransition: null, hasTransitions: null, setDefaultState: null
     });
 
-  $inplace.states.Behaviour = $inplace.State.clone()
-    .extend({
-      _delegateHandlersInto: function(target) {
-        this.__handlers.forEach(function(handler, handlerName){
-          if(!handler || 'function' != typeof(handler)) return;
 
-          target.__makeHandlerMaker(handlerName);
-          target[handlerName](handler);
-
-          this.__handlers[handlerName] = function(msg) {
-            target[handlerName](msg);
-          };
-        }, this);
-      }
-    });
 
 })(jQuery);

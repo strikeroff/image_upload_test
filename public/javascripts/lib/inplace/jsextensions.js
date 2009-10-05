@@ -165,19 +165,21 @@ String.prototype.filterPrefix = function (prefix) {
     return this.toString();
 };
 
-/*
-Object.prototype.get = function(key){
-    return this[key];
-};
-Object.prototype.put = function(key, value){
-    this[key] = value;
-};
-*/
-
 if (!window.console) {
     var con = window.console = {};
     ["log", "debug", "info", "warn", "error", "assert", "dir", "dirxml", "group", "groupEnd", "time", "timeEnd", "count", "trace", "profile", "profileEnd"].forEach(function (name) {
         con[name] = Function.emptyFunction;
     });
 };
+
+(function($){
+  if (!Array.prototype.without) {
+    Array.prototype.without = function() {
+      var values = $.makeArray(arguments);
+      return this.removeIf(function(item){
+        return values.some(function(value) { return value == item; } );
+      }, this);
+    }
+  }
+})(jQuery);
 

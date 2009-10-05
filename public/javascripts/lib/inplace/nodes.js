@@ -7,11 +7,12 @@
     this.data   = data || null;
   };
 
-  $inplace.Node = $inplace.Meta.clone()
+  $inplace.Node = $inplace.Meta.clone("Node")
     .extend({
       __childs: [],
-      __downstreamHandlers: [],
-      __upstreamHandlers: [],
+      __downstreamHandlers: $inplace.utils.clonableObject(),
+      __upstreamHandlers: $inplace.utils.clonableObject(),
+      __enabled: true,
 
       appendChild: function(child) {
         this.__childs.push(child);
@@ -44,7 +45,6 @@
       },
 
       messageHandler: function(msg){
-        //console.log('enter to message handler');
         var handlers = this.__downstreamHandlers[msg.topic];
         if(handlers) {
           var _this = this;
@@ -52,7 +52,6 @@
             if('function' == typeof(handler)) handler.apply(_this, [msg]);
           });
         }
-        //console.log('leave message handler');
       },
       
       childMessageHandler: function(msg){
@@ -85,13 +84,14 @@
           if(!this.parentNode) return;
           this.parentNode._processChildMessage(msg);
         } catch (exc) {
-          console.log('Exception while sending message to parent: '+exc.type);
+          console.error('Exception while sending message to parent: '+exc.type);
           if(exc.type != 'message-trap') throw exc;
         }
       },
       
       _processMessage: function(msg) {
-        //console.log('Enter to processMessage');
+        if(!this.__enabled) return;
+        //console.debug('Enter to processMessage: ', msg.topic, " for: ", this.__hint);
         try {
           this.messageHandler(msg);
           
@@ -101,7 +101,7 @@
             });
           }
         } catch (exc) {
-          console.log("Exception while processing broadcast message: "+exc.type);
+          console.error("Exception while processing broadcast message: "+exc.type);
           if(exc.type != 'message-trap') throw exc;
         }
       },
@@ -132,6 +132,33 @@
           handlers = handlers.without(handler);
         }
         return this;
+      },
+
+      enable: function() {
+        //console.log("Enabling: ", this.__hint);
+        this.__enabled = true;
+      },
+
+      disable: function() {
+        //console.log("Disabling: ", this.__hint);
+        this.__enabled = false;
+      },
+
+      disableChilds: function() {
+        if(!this.__childs) return;
+        //console.log("Disabling childs for: ", this.__hint);
+        this.__childs.forEach(function(child){ child.disable(); });
+      },
+
+      __printNodesTree: function(prefix) {
+        var prefix = prefix || "";
+        var postfix = this.__enabled ? " [Enabled]" : " [Disabled]";
+        console.log(prefix, this.__hint, postfix, this);
+        if(this.__childs) {
+          this.__childs.forEach(function(child) {
+            child.__printNodesTree(prefix+"| ");
+          });
+        }
       }
     });
     
