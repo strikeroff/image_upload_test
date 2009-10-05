@@ -1,0 +1,37 @@
+<div style="padding-top:100px;padding-left:200px;">
+  <%= flash_messages %>
+  <div style="padding-top:100px;">
+    <% form_for @object, :url=>products_url, :html=>{:multipart=>true, :class=>"validate"} do |form| %>
+        <div>
+          <%= form.error_messages %>
+        </div>
+        <div>
+          Укажите title
+        </div>
+        <div>
+          <%= form.text_field :title %>
+        </div>
+        <div>
+          Укажите описание
+        </div>
+        <div>
+          <%= form.text_area :description %>
+        </div>
+
+        <div>
+          Выберете картинку
+        </div>
+        <div>
+          thumbnail<%= form.file_field :thumbnail %>
+        </div>
+        <div>
+          detail <%= form.file_field :detail %>
+        </div>
+        <div style="padding-top:20px;">
+          <%= submit_tag "Сохранить продукт" %>
+        </div>
+    <% end %>
+
+  </div>
+
+</div>

@@ -1,0 +1,14 @@
+<div style="padding-top:100px;padding-left:100px;">
+                        thumbnail
+  <%= image_tag(@object.thumbnail(:preview)) %>
+                        detail
+  <%= image_tag(@object.detail(:small)) %>
+  
+  <div style="padding-top:20px;">
+    <%= "Title #{@object.title}" %>
+  </div>
+  <div style="padding-top:20px;">
+    <%= "Description #{@object.description}" %>
+  </div>
+</div>
+

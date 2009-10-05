@@ -31,7 +31,7 @@ Rails::Initializer.run do |config|
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
   # :all can be used as a placeholder for all plugins not explicitly named
-  # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
+  config.plugins = [ :resource_controller]
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
@@ -46,11 +46,16 @@ Rails::Initializer.run do |config|
   config.time_zone = 'UTC'
 #  config.gem 'inplace_paperclip', :lib=>'paperclip'
   config.gem "inplace"
+  config.gem 'grimen-validatious-on-rails', :lib => 'validatious', :source => 'http://gems.github.com'
+  config.gem "redinger-validation_reflection", :lib=>"validation_reflection", :source => 'http://gems.github.com'
+
 
   require "flash_messages.rb"
 
+
   config.after_initialize do
-    require "configuration.rb"    
+    require "configuration.rb"
+    require "image_associations.rb"
 #    require "resource_controller_routes.rb"
   end
   # The internationalization framework can be changed to have another default locale (standard is :en) or more load paths.

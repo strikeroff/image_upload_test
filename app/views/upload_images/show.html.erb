@@ -1,0 +1,42 @@
+<div style="padding-top:100px;padding-left:100px;">
+  <%= image_tag(@inplace_image.data(:default) ) %>
+
+  <div>
+    <%= link_to "Кропать?", test_crop_image_url(@inplace_image) %>
+  </div>
+  <div style="padding-top:100px;">
+    Перезагрузить фотку
+    <% form_for @inplace_image, :inplace_image, :url=> reupload_image_url(:id=>@inplace_image.id), :html=>{:multipart=>true} do |form| %>
+        <div>
+          <%= form.error_messages %>
+        </div>
+        <div>
+          Укажите alias
+        </div>
+        <div>
+
+          <input type="text" name="alias" value="<%= @inplace_image.alias %>">
+        </div>
+
+        <!--<div>-->
+        <!--Укажите тип геометрии(например mainpage)-->
+        <!--</div>-->
+
+        <!--<div>-->
+        <!--<%= form.text_field :geometry_type %>-->
+        <!--</div>-->
+
+        <div>
+          Выберете картинку
+        </div>
+        <div>
+          <%= form.file_field :data %>
+        </div>
+        <div style="padding-top:20px;">
+          <%= submit_tag "Сохранить файл" %>
+        </div>
+    <% end %>
+
+  </div>
+</div>
+
