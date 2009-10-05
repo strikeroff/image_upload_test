@@ -133,7 +133,7 @@
       },
 
       __makeHandlerMaker: function(handlerName) {
-        
+ 
         this.__handlers[handlerName] = null;
         var _this = this;
         this[handlerName] = function(object) {
@@ -161,19 +161,20 @@
       _delegateHandlersInto: function(target) {
         var source = this;
         $.each(this.__handlers, function(handlerName, handler){
-          //if(!handler) return;
 
           target.__makeHandlerMaker(handlerName);
           if('function' == typeof(handler)) {
             target[handlerName](handler);
           }
 
-          console.debug("delegating handler: ", handlerName);
+          //console.debug("delegating handler: ", handlerName);
           source[handlerName] = function(object) {
-            console.debug('delegate handler call for ', handlerName);
+            //console.debug('delegate handler call for ', handlerName);
             target[handlerName](object);
           };
         });
+        this.reset(); // На самом деле нужно делать не reset, а просто переподписать на события текущие хендлеры
+                      // т.к. ссылки на них сменились.
       }
     });
 

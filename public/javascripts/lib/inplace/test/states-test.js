@@ -81,9 +81,7 @@ var testState = null;
 
   var cState = $inplace.test.CompositeState.clone("test.cState");
   console.log('activate');
-  cState.sendMessage('activate');
-  cState.__printNodesTree();
-  
+  cState.sendMessage('activate');  
   console.log('show');
   cState.sendMessage('show');
   console.log('hide');
