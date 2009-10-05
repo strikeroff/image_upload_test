@@ -9,36 +9,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090928094528) do
-
-  create_table "inplace_files", :force => true do |t|
-    t.string   "data_file_name"
-    t.string   "data_content_type"
-    t.integer  "data_file_size"
-    t.datetime "data_updated_at"
-    t.string   "alias"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "inplace_images", :force => true do |t|
-    t.string   "data_file_name"
-    t.string   "data_content_type"
-    t.integer  "data_file_size"
-    t.datetime "data_updated_at"
-    t.string   "geometry_type"
-    t.string   "alias"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "products", :force => true do |t|
-    t.string   "title"
-    t.text     "description"
-    t.integer  "thumbnail_id"
-    t.integer  "detail_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 0) do
 
 end
