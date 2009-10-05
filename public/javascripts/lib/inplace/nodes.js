@@ -75,7 +75,7 @@
         var sender = sender || this;
         
         if(!this.parentNode) return this;
-        this.parentNode._processChildMessage(new $inplace.Message(topic, sender, data);
+        this.parentNode._processChildMessage(new $inplace.Message(topic, sender, data));
         return this;
       },
 

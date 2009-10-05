@@ -6,18 +6,8 @@
     this.handlers = handlers;
   };
 
-  $inplace.states.Behaviour = $inplace.State.clone();
-
   $inplace.states.StateFinalizationException = { type: 'state-finalization-invalid' };
 
-  $inplace.CompositeState = $inplace.Node.clone()
-    .extend({
-      addState: function(state) {
-        this.appendChild(state.clone());
-        return this;
-      }
-    });
-  
   $inplace.State = $inplace.Node.clone()
     .extend({
       __transitions: new $inplace.utils.Hash(),
@@ -26,7 +16,7 @@
       hasState: function(stateName, behaviour) {
         var behaviour = behaviour || $inplace.State;
         this.__states = this.__states || {};
-        
+
         var state = this.__states[stateName];
         if(!state) { // ?
           state = behaviour.clone();
@@ -73,14 +63,14 @@
         }, this);
         return $.makeArray(handlers) || [];
       },
-      
+
       _hasTransition: function(from, description) {
         var trans = this.__transitions.get(from);
         if(!trans) { // ?
           trans = {};
           this.__transitions.set(from, trans);
         }
-        
+
         var direction = trans[description.event];
         if(!direction) { // ?
           trans[description.event] = direction = { target: description.target, handlers: this.__makeHandlerMakers(description.handlers)};
@@ -95,7 +85,7 @@
         if(!this.__transitions.has(this.__states[this._currentState])) return;
 
         var _this = this;
-        
+
         $.each(this.__transitions.get(this.__states[this._currentState]), function(event, direction) {
           $.each(direction.handlers, function(index, handler) {
             _this.subscribe(event, _this[handler]);
@@ -126,7 +116,7 @@
           _this.unsubscribe(event, _this.__finishTransition);
         });
       },
-      
+
       __makeHandlerMaker: function(handlerName) {
         console.log("handler name: ", handlerName);
 
@@ -141,9 +131,38 @@
           }
           return _this;
         };
-        
+
         return this;
       }
     });
-  
+
+  $inplace.CompositeState = $inplace.State.clone()
+    .extend({
+      hasState: function(behaviour) {
+        if(!behaviour._delegateHandlersInto) return this;
+        
+        var instance = behaviour.clone();
+        this.appendChild(instance);
+        instance._delegateHandlersInto(this);
+        return this;
+      },
+      parentState: null, hasTransition: null, hasTransitions: null, setDefaultState: null, reset: null
+    });
+
+  $inplace.states.Behaviour = $inplace.State.clone()
+    .extend({
+      _delegateHandlersInto: function(target) {
+        this.__handlers.forEach(function(handler, handlerName){
+          if(!handler || 'function' != typeof(handler)) return;
+
+          target.__makeHandlerMaker(handlerName);
+          target[handlerName](handler);
+
+          this.__handlers[handlerName] = function(msg) {
+            target[handlerName](msg);
+          };
+        }, this);
+      }
+    });
+
 })(jQuery);

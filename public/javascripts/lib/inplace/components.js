@@ -27,8 +27,8 @@ $inplace.components = {};
           .reset();
 
   $inplace.Component = $inplace.CompositeState.clone()
-          .addState($inplace.components.BaseBehaviour)
-          .addState($inplace.components.StandardSaveBehaviour);
+          .hasState($inplace.components.BaseBehaviour)
+          .hasState($inplace.components.StandardSaveBehaviour);
 
 
 })(jQuery);
