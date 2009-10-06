@@ -5,6 +5,7 @@ class CreateProducts < ActiveRecord::Migration
       t.text :description
       t.integer :thumbnail_id
       t.integer :detail_id
+      t.integer :file_description_id
 
       t.timestamps
     end

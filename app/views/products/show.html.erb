@@ -1,9 +1,9 @@
 <div style="padding-top:100px;padding-left:100px;">
-                        thumbnail
-  <%= image_tag(@object.thumbnail(:preview)) %>
-                        detail
-  <%= image_tag(@object.detail(:small)) %>
-  
+  thumbnail
+  <%= image_tag(@object.thumbnail(:preview)) if @object.thumbnail_attached? %>
+  detail
+  <%= image_tag(@object.detail(:small)) if @object.detail_attached? %>
+
   <div style="padding-top:20px;">
     <%= "Title #{@object.title}" %>
   </div>

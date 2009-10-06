@@ -8,7 +8,7 @@ class InplaceImage < ActiveRecord::Base
   
 
   attr_accessor  :crop_options
-
+  attr_accessor :save_data_options
 
   def crop_str
     return "" if self.crop_options.blank?

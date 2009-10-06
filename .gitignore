@@ -5,4 +5,5 @@ tmp
 .svn
 .idea
 public/images/inplace_images
+public/inplace_files
 log/*.log

@@ -17,7 +17,12 @@
         <div>
           <%= form.text_area :description %>
         </div>
-
+        <div>
+          Выберете файл
+          <div>
+              <%= form.file_field :file_description%>
+            </div>
+          </div>
         <div>
           Выберете картинку
         </div>
@@ -27,6 +32,8 @@
         <div>
           detail <%= form.file_field :detail %>
         </div>
+        
+
         <div style="padding-top:20px;">
           <%= submit_tag "Сохранить продукт" %>
         </div>

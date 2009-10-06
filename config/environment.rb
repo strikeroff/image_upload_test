@@ -56,6 +56,7 @@ Rails::Initializer.run do |config|
   config.after_initialize do
     require "configuration.rb"
     require "image_associations.rb"
+    require "files_associations.rb"
 #    require "resource_controller_routes.rb"
   end
   # The internationalization framework can be changed to have another default locale (standard is :en) or more load paths.
