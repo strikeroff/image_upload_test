@@ -1,15 +1,18 @@
 var $inplace = $inplace || {};
 $inplace.utils = {};
+var clonableObject = function(object) { return object; };
 
 (function($) {
 
-  $inplace.utils.cloneFunction = function(hint, translations) {
+  $inplace.utils.cloneFunction = function(hint, translations, exceptations) {
     var result = {};
     var hint = hint || this.__hint;
-    translations = translations || new $inplace.utils.Hash();
+    var exceptations = exceptations || this.$cloneExceptations || [];
+    var translations = translations || new $inplace.utils.Hash();
     translations.set(this, result);
 
     for (var name in this) {
+      if(exceptations.some(function(item) { return item == name; })) continue;
       var object = this[name];
 
       if (object && typeof object === "object" && !object.nodeType) {
@@ -28,10 +31,15 @@ $inplace.utils = {};
     //$.extend(true, {}, this);
 
     result.__hint = hint;
+    delete result['$cloneExceptations'];
+    if(result.$$cloneExceptations) {
+      result.$cloneExceptations = result.$$cloneExceptations;
+    }
+    delete result['$$cloneExceptations'];
     return result;
   };
 
-  $inplace.utils.clonableObject = function(object) {
+  clonableObject = $inplace.utils.clonableObject = function(object) {
     return $.extend(object || {}, {
       clone: $inplace.utils.cloneFunction
     })
@@ -109,6 +117,12 @@ $inplace.utils = {};
     clone: $inplace.utils.cloneFunction,
     extend: function(obj) {
       return $.extend(this, obj);
+    },
+    makeNewer: function() {
+      if(!this.$cloneExceptations) return;
+      this.$$cloneExceptations = this.$cloneExceptations;
+      delete this["$cloneExceptations"];
+      return this;
     }
   };
 })(jQuery);

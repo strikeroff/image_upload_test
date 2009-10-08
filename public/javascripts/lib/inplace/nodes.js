@@ -10,8 +10,8 @@
   $inplace.Node = $inplace.Meta.clone("Node")
     .extend({
       __childs: [],
-      __downstreamHandlers: $inplace.utils.clonableObject(),
-      __upstreamHandlers: $inplace.utils.clonableObject(),
+      __downstreamHandlers: clonableObject(),
+      __upstreamHandlers: clonableObject(),
       __enabled: true,
 
       appendChild: function(child) {
@@ -84,8 +84,10 @@
           if(!this.parentNode) return;
           this.parentNode._processChildMessage(msg);
         } catch (exc) {
-          console.error('Exception while sending message to parent: '+exc.type);
-          if(exc.type != 'message-trap') throw exc;
+          if(exc.type != 'message-trap') {
+            console.error('Exception while sending message to parent: '+exc.type);
+            throw exc;
+          }
         }
       },
       
@@ -101,8 +103,10 @@
             });
           }
         } catch (exc) {
-          console.error("Exception while processing broadcast message: "+exc.type);
-          if(exc.type != 'message-trap') throw exc;
+          if(exc.type != 'message-trap') {
+            console.error("Exception while processing broadcast message: "+exc.type);
+            throw exc;
+          }
         }
       },
       

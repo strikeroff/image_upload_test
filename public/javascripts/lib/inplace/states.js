@@ -13,10 +13,10 @@
    */
   $inplace.State = $inplace.Node.clone("State")
     .extend({
-      __transitions: $inplace.utils.clonableObject(new $inplace.utils.Hash()),
+      __transitions: clonableObject(new $inplace.utils.Hash()),
       _currentState: null,
       __handlers: {},
-      __states: $inplace.utils.clonableObject(),
+      __states: clonableObject(),
     
       hasState: function(stateName, behaviour, hint) {
         var behaviour = behaviour || $inplace.State;
@@ -84,7 +84,9 @@
         if(!direction) { // ?
           trans[description.event] = direction = { target: description.target, handlers: this.__makeHandlerMakers(description.handlers)};
         } else {
-          direction.target = description.target;
+          if(description.target) {
+            direction.target = description.target;
+          }
           $.merge(direction.handlers, this.__makeHandlerMakers(description.handlers));
         }
       },
